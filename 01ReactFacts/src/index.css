@@ -1,0 +1,72 @@
+/* 
+Challenge: Place the gray react logo in the background
+
+Don't use an `img` element, but rather set it as the
+`background-image` of the `main` element.
+
+Hint: you'll need to use the following properties:
+- background-image: url(...)
+- background-repeat
+- background-position
+
+(Or the shorthand `background` property with values for all
+those other properties)
+*/
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  background-color: #030303;
+  color: #ffffff;
+}
+
+.navbar {
+  background-color: #1f1f1f;
+  padding: 1rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 7px;
+  color: #61dafb;
+}
+
+.nav-img {
+  height: 55px;
+}
+
+.nav-text {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.mainContent {
+  padding: 2rem;
+  font-size: 1.2rem;
+  line-height: 1.6;
+  font-weight: 400;
+  background: #282d35;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  background: url("./assets/react.svg") no-repeat right center, #282d35;
+  background-size: 400px auto;
+  background-position: right center;
+  background-blend-mode: luminosity;
+}
+
+.main-facts {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.main-fact::marker {
+  color: #61dafb;
+  font-size: 1.5rem;
+}
