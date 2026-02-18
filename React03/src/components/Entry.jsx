@@ -18,7 +18,7 @@ import { FaMapMarkerAlt } from "react-icons/fa";
 const Entry = ({ img, title, country, googleMapsLink, dates, text }) => {
   return (
     <div
-      className="flex w-117.5 h-52 justify-center items-center gap-6"
+      className="flex w-117.5 h-52 justify-center items-center gap-6 border-b-2"
       style={{ fontFamily: "Inter , sans-serif" }}
     >
       <div id="image" className="w-30.25 h-42 rounded-sm shrink-0">
