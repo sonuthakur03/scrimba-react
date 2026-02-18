@@ -15,7 +15,7 @@ import data from "./data";
 
 function App() {
   const entries = data.map((entry) => {
-    return <Entry key={entry.id} entry={entry} />;
+    return <Entry key={entry.id} {...entry} />;
   });
   return (
     <div className="flex justify-center items-center h-screen">
