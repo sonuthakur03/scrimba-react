@@ -27,9 +27,19 @@
  * pun (`isPun`).
  */
 
+/**
+ * Challenge: See if you can correctly pass the necessary props to the
+ * Joke component in the .map() (and render the jokeElements array) so
+ * the jokes show up on the page again
+ */
+
 import Jokes from "./components/Jokes";
+import jokesData from "./jokesData";
 
 function App() {
+  const jokeElements = jokesData.map((joke) => {
+    return <Jokes setup={joke.setup} punchline={joke.punchline} id={joke.id} />;
+  });
   return (
     <>
       <section
@@ -41,15 +51,7 @@ function App() {
             Jokes that will make you laugh till your death.
           </h2>
           <hr />
-          <Jokes
-            id="1"
-            setup="I got my daughter a fridge for her birthday."
-            punchline="I can't wait to see her face light up when she opens it."
-          />
-          <Jokes
-            id="2"
-            punchline="It's hard to explain puns to kleptomaniacs because they always take things literally."
-          />
+          {jokeElements}
         </div>
       </section>
     </>
