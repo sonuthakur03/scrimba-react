@@ -15,17 +15,7 @@ import data from "./data";
 
 function App() {
   const entries = data.map((entry) => {
-    return (
-      <Entry
-        key={entry.id}
-        img={entry.img}
-        title={entry.title}
-        country={entry.country}
-        googleMapsLink={entry.googleMapsLink}
-        dates={entry.dates}
-        text={entry.text}
-      />
-    );
+    return <Entry key={entry.id} entry={entry} />;
   });
   return (
     <div className="flex justify-center items-center h-screen">
