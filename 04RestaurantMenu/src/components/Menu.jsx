@@ -9,6 +9,7 @@ const Menu = ({ menuData }) => {
       </h2>
       <section id="starters">
         <MenuCategories
+          key={restaurant.id}
           currency={restaurant.currency}
           categories={restaurant.categories}
         />

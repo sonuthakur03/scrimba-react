@@ -3,7 +3,7 @@ import { menuData } from "./menuData";
 
 function App() {
   return (
-    <div className="h-screen bg-black text-white flex items-center justify-center">
+    <div className="h-full min-h-screen bg-black text-white flex items-center justify-center">
       <Menu menuData={menuData} />
     </div>
   );

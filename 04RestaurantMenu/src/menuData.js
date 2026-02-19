@@ -55,6 +55,65 @@ export const menuData = [
           },
         ],
       },
+      {
+        id: 2,
+        title: "Burgers",
+        titleText: "Delicious burgers with fresh toppings and sauces.",
+        img: "https://images.pexels.com/photos/1108117/pexels-photo-1108117.jpeg",
+        items: [
+          {
+            id: 1,
+            name: "Classic Chicken Burger",
+            description:
+              "Juicy chicken patty with lettuce, tomato, and cheese.",
+            price: 200,
+            isSpecial: true,
+          },
+          {
+            id: 2,
+            name: "Veggie Burger",
+            description: "Grilled vegetable patty with fresh greens.",
+            price: 180,
+            isSpecial: false,
+          },
+          {
+            id: 3,
+            name: "Cheese Burger",
+            description: "Chicken patty with melted cheese and secret sauce.",
+            price: 210,
+            isSpecial: false,
+          },
+        ],
+      },
+      {
+        id: 3,
+        title: "Drinks",
+        titleText: "Refreshing beverages to complement your meal.",
+        img: "https://images.pexels.com/photos/2396220/pexels-photo-2396220.jpeg",
+        items: [
+          {
+            id: 1,
+            name: "Fresh Lemonade",
+            description: "Citrusy and refreshing lemonade.",
+            price: 50,
+            isSpecial: false,
+          },
+          {
+            id: 2,
+            name: "Cold Coffee",
+            description: "Chilled coffee with cream and sugar.",
+            price: 80,
+            isSpecial: true,
+          },
+          {
+            id: 3,
+            name: "Mango Shake",
+            description: "Sweet mango shake with ice cream.",
+            price: 100,
+            isSpecial: false,
+          },
+        ],
+      },
     ],
   },
 ];
