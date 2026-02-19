@@ -1,4 +1,4 @@
-import MenuSections from "./MenuSections";
+import MenuCategories from "./MenuCategories";
 
 const Menu = ({ restaurant }) => {
   const dessert = restaurant.menuSections.filter(
@@ -23,12 +23,24 @@ const Menu = ({ restaurant }) => {
         <main className="flex w-full gap-8">
           <section id="starters" className="w-3/5">
             {others.map((section) => {
-              return <MenuSections key={section.id} section={section} />;
+              return (
+                <MenuCategories
+                  key={section.id}
+                  currency={section.currency}
+                  categories={section.categories}
+                />
+              );
             })}
           </section>
           <section id="dessert" className="w-2/5">
             {dessert.map((section) => {
-              return <MenuSections key={section.id} section={section} />;
+              return (
+                <MenuCategories
+                  key={section.id}
+                  currency={section.currency}
+                  categories={section.categories}
+                />
+              );
             })}
           </section>
         </main>
