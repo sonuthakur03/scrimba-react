@@ -2,9 +2,10 @@ export const menuData = [
   {
     restaurantName: "Himalayan Bites",
     currency: "NPR",
+    id: 1,
     categories: [
       {
-        id: "sandwich",
+        id: 1,
         title: "Sandwiches",
         titleText:
           "Includes your choice of garden salad, mixed fresh fruits or baked potato chips.",
@@ -27,14 +28,14 @@ export const menuData = [
           {
             id: 3,
             name: "Cheese Corn Sandwich",
-            description: "Creamy cheese mixed with sweet corn.",
+            description: "Creamy cheese mixed with sweet corn and herbs.",
             price: 110,
             isSpecial: false,
           },
           {
             id: 4,
-            name: "Tuna Sandwich",
-            description: "Fresh tuna mix with light seasoning.",
+            name: "Tuna Delight Sandwich",
+            description: "Fresh tuna filling with light seasoning and lettuce.",
             price: 150,
             isSpecial: true,
           },
@@ -43,6 +44,13 @@ export const menuData = [
             name: "Spicy Paneer Sandwich",
             description: "Grilled paneer with spicy sauce and onions.",
             price: 130,
+            isSpecial: false,
+          },
+          {
+            id: 6,
+            name: "Egg Mayo Sandwich",
+            description: "Boiled eggs mixed with creamy mayo and pepper.",
+            price: 90,
             isSpecial: false,
           },
         ],
