@@ -1,5 +1,6 @@
+import { useState } from "react";
+
 const Main = () => {
-  const ingredients = ["Chicken", "Oregano", "Tomatoes"];
   /**
    * Review Challenge:
    * Map over the list of ingredients and render them as list items
@@ -17,6 +18,7 @@ const Main = () => {
    * Hint: this is a one-liner solution, so don't overthink it 😅
    */
 
+  const [ingredients, setIngredients] = useState([]);
   const ingredientList = ingredients.map((ingredient) => (
     <li key={ingredient}>{ingredient}</li>
   ));
@@ -25,9 +27,7 @@ const Main = () => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     const newIngredient = formData.get("ingredient");
-    console.log(newIngredient);
-    ingredients.push(newIngredient);
-    console.log(ingredients);
+    setIngredients((prevIngredients) => [...prevIngredients, newIngredient]);
   };
   return (
     <main className="w-[50%] h-auto my-0 mx-auto flex  justify-center flex-col bg-[#fafaf8] ">
