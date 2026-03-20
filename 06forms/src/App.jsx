@@ -1,18 +1,25 @@
 function App() {
-  const signup = (formData) => {
-    const name = formData.get("name");
-    const password = formData.get("password");
-    const empStatus = formData.get("empStatus");
-    const diet = formData.getAll("diet");
-    const color = formData.get("color");
-    const desc = formData.get("desc");
+  // const signup = (formData) => {
+  //   const name = formData.get("name");
+  //   const password = formData.get("password");
+  //   const empStatus = formData.get("empStatus");
+  //   const diet = formData.getAll("diet");
+  //   const color = formData.get("color");
+  //   const desc = formData.get("desc");
 
-    console.log("Name:", name);
-    console.log("Password:", password);
-    console.log("Employment Status:", empStatus);
-    console.log("Dietary Preferences:", diet);
-    console.log("Favorite Color:", color);
-    console.log("Description:", desc);
+  //   console.log("Name:", name);
+  //   console.log("Password:", password);
+  //   console.log("Employment Status:", empStatus);
+  //   console.log("Dietary Preferences:", diet);
+  //   console.log("Favorite Color:", color);
+  //   console.log("Description:", desc);
+  // };
+
+  const signup = (formData) => {
+    const data = Object.fromEntries(formData);
+    const dietData = formData.getAll("diet");
+    const allData = { ...data, diet: dietData };
+    console.log(allData);
   };
 
   /* 
