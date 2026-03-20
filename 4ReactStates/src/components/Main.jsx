@@ -23,9 +23,7 @@ const Main = () => {
     <li key={ingredient}>{ingredient}</li>
   ));
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const formData = new FormData(event.currentTarget);
+  const addIngredients = (formData) => {
     const newIngredient = formData.get("ingredient");
     setIngredients((prevIngredients) => [...prevIngredients, newIngredient]);
   };
@@ -33,7 +31,7 @@ const Main = () => {
     <main className="w-[50%] h-auto my-0 mx-auto flex  justify-center flex-col bg-[#fafaf8] ">
       <form
         className="flex h-30 items-center justify-center w-full gap-4 pt-8"
-        onSubmit={handleSubmit}
+        action={addIngredients}
       >
         <input
           type="text"
