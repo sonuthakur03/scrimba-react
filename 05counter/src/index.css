@@ -67,11 +67,11 @@ body {
   margin-right: -20px;
   z-index: 1;
 }
-main > .title {
+section > .title {
   text-align: center;
 }
 
-main > .value {
+section > .value {
   background-color: white;
   border: none;
   border-radius: 50%;

@@ -14,12 +14,12 @@ const Ternary = () => {
   };
   return (
     <>
-      <main>
+      <section>
         <h1 className="title">Do I feel like going out tonight?</h1>
         <button className="value" onClick={handleClick}>
           {isGoingOut ? "Yes" : "No"}
         </button>
-      </main>
+      </section>
     </>
   );
 };

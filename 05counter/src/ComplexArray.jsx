@@ -31,10 +31,10 @@ const ComplexArray = () => {
   }
 
   return (
-    <main>
+    <section>
       <button onClick={addFavoriteThing}>Add item</button>
       <section aria-live="polite">{thingsElements}</section>
-    </main>
+    </section>
   );
 };
 
