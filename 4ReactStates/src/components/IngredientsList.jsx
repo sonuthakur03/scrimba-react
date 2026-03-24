@@ -1,4 +1,4 @@
-const IngredientsList = ({ ingredients, toggleRecipe }) => {
+const IngredientsList = ({ ingredients, getRecipe }) => {
   const ingredientList = ingredients.map((ingredient) => (
     <li key={ingredient}>{ingredient}</li>
   ));
@@ -16,7 +16,7 @@ const IngredientsList = ({ ingredients, toggleRecipe }) => {
           </div>
           <button
             className=" text-white py-2 px-4 rounded-sm bg-[#e95928] hover:bg-[#D17557] transition-colors duration-300 cursor-pointer"
-            onClick={toggleRecipe}
+            onClick={getRecipe}
           >
             Get a recipe
           </button>

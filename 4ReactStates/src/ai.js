@@ -30,7 +30,7 @@ export async function getRecipeFromAI(ingredientsArr) {
       ],
       max_tokens: 400,
     });
-    console.log("Primary model response:", response);
+    // console.log("Primary model response:", response);
 
     const recipe = response.choices?.[0]?.message?.content?.trim();
     if (recipe) return recipe;
