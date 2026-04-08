@@ -1,4 +1,20 @@
+import { useState } from "react";
+
 const Main = () => {
+  const [meme, setMeme] = useState({
+    topText: "One does not simply",
+    bottomText: "Walk into Mordor",
+    imgUrl: "http://i.imgflip.com/1bij.jpg",
+  });
+
+  const handleChange = (event) => {
+    const { value } = event.currentTarget;
+    // console.log(value);
+    setMeme((prevMeme) => ({
+      ...prevMeme,
+      topText: value,
+    }));
+  };
   return (
     <>
       <main className="w-[50%] flex items-center justify-center flex-col gap-4 bg-white p-4 ">
@@ -15,6 +31,7 @@ const Main = () => {
                   name="topText"
                   id="top"
                   className="p-2 border-2 rounded-lg"
+                  onChange={handleChange}
                 />
               </div>
               <div className="flex flex-col gap-2">
@@ -43,12 +60,12 @@ const Main = () => {
         </section>
         <section>
           <div className="relative ">
-            <img src="http://i.imgflip.com/1bij.jpg" />
+            <img src={meme.imgUrl} />
             <span className="absolute top-0 left-0 right-0 text-center text-white font-bold text-xl drop-shadow-[0_2px_2px_rgba(0,0,0,1)]">
-              One does not simply
+              {meme.topText}
             </span>
             <span className="absolute bottom-0 left-0 right-0 text-center text-white font-bold text-xl drop-shadow-[0_2px_2px_rgba(0,0,0,1)]">
-              Walk into Mordor
+              {meme.bottomText}
             </span>
           </div>
         </section>
