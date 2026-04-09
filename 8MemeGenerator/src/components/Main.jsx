@@ -8,11 +8,11 @@ const Main = () => {
   });
 
   const handleChange = (event) => {
-    const { value } = event.currentTarget;
+    const { value, name } = event.currentTarget;
     // console.log(value);
     setMeme((prevMeme) => ({
       ...prevMeme,
-      topText: value,
+      [name]: value,
     }));
   };
   return (
@@ -32,6 +32,7 @@ const Main = () => {
                   id="top"
                   className="p-2 border-2 rounded-lg"
                   onChange={handleChange}
+                  value={meme.topText}
                 />
               </div>
               <div className="flex flex-col gap-2">
@@ -44,6 +45,8 @@ const Main = () => {
                   name="bottomText"
                   id="bottom"
                   className="p-2 border-2 rounded-lg"
+                  onChange={handleChange}
+                  value={meme.bottomText}
                 />
               </div>
             </div>
