@@ -1,4 +1,4 @@
-const IngredientsList = ({ ingredients, getRecipe }) => {
+const IngredientsList = ({ ingredients, getRecipe, ref }) => {
   const ingredientList = ingredients.map((ingredient) => (
     <li key={ingredient}>{ingredient}</li>
   ));
@@ -8,7 +8,7 @@ const IngredientsList = ({ ingredients, getRecipe }) => {
       <ul className="list-disc pl-5 text-[#475467]">{ingredientList}</ul>
       {ingredients.length > 3 && (
         <div className="flex items-center bg-[#F0EFEB] p-8 rounded-md border border-black justify-between mt-8">
-          <div className="flex flex-col gap-2">
+          <div ref={ref} className="flex flex-col gap-2">
             <h3 className="text-xl">Ready for a recipe?</h3>
             <p className="text-[#475467] text-sm">
               Generate a recipe from your list of ingredients.

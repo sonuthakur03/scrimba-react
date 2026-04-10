@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import IngredientsList from "./IngredientsList";
 import Recipe from "./Recipe";
 import { getRecipeFromAI } from "../ai";
@@ -7,6 +7,13 @@ const Main = () => {
   const [ingredients, setIngredients] = useState([]);
   const [recipe, setRecipe] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const recipeSection = useRef(null);
+  useEffect(() => {
+    if (recipe !== "" && recipeSection.current) {
+      recipeSection.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [recipe]);
 
   const getRecipe = async () => {
     setLoading(true);
@@ -38,7 +45,11 @@ const Main = () => {
         </button>
       </form>
       {ingredients.length > 0 && (
-        <IngredientsList ingredients={ingredients} getRecipe={getRecipe} />
+        <IngredientsList
+          ref={recipeSection}
+          ingredients={ingredients}
+          getRecipe={getRecipe}
+        />
       )}
       {loading ? (
         <>
