@@ -2,7 +2,7 @@ const Header = () => {
   return (
     <>
       <header
-        className="w-[50%] flex items-center justify-center gap-4 p-4 text-white h-16"
+        className="w-full max-w-2xl mx-auto flex items-center justify-center gap-4 p-4 text-white h-16"
         style={{
           background: "linear-gradient(90deg, #672280 1.18%, #A626D3 100%)",
         }}
