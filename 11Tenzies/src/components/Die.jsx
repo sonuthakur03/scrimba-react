@@ -1,19 +1,11 @@
-/**
- * Challenge:
- *
- * - Create a Die component that takes a `value` prop
- * - Render 10 instances of the Die component (manually)
- *      - Provide a number between 1-6 for the value on each
- *        for now
- * - Style the <main> and <Die> components
- *   to look like they do in the slide
- *      - Hints: Create a container to hold the 10 instances
- *        of the Die component, and use CSS Grid to lay them
- *        out evenly in 2 rows of 5 columns
- *      - Use flexbox on main to center the dice container
- *        in the center of the page
- */
-
-export const Die = ({ value }) => {
-  return <div>{value}</div>;
+export const Die = ({ id, value, isHeld , hold}) => {
+  return (
+    <button
+      className={`flex justify-center items-center w-10 h-10  ${isHeld? "bg-[#59E391]" : "bg-white"} rounded-md p-8 text-xl font-semibold shadow-[0_4px_0_0_rgba(0,0,0,0.1),0_10px_15px_-3px_rgba(0,0,0,0.2)] 
+     hover:translate-y-[-2px] transition-all duration-300 ease-in-out cursor-pointer`}
+     onClick={() => hold(id)}
+    >
+      {value}
+    </button>
+  );
 };
