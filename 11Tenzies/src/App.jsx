@@ -1,54 +1,85 @@
-import { useState, useRef , useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Die } from "./components/Die";
-import {nanoid} from "nanoid";
-import { useWindowSize } from 'react-use'
-import Confetti from 'react-confetti'
+import { nanoid } from "nanoid";
+import { useWindowSize } from "react-use";
+import Confetti from "react-confetti";
+import Timer from "./components/Timer";
 
 function App() {
   const [newDice, setNewDice] = useState(() => generateAllNewDice());
   const { width, height } = useWindowSize();
+  const [timer, setTimer] = useState(0);
+  const [bestTime, setBestTime] = useState(() => {
+    const saved = localStorage.getItem("bestTime");
+    return saved ? Number(saved) : 0;
+  });
   const buttonRef = useRef(null);
-  let gameWon = newDice.every(die => die.isHeld) && newDice.every(die => die.value === newDice[0].value);
+  let gameWon =
+    newDice.every((die) => die.isHeld) &&
+    newDice.every((die) => die.value === newDice[0].value);
 
   useEffect(() => {
-      if(gameWon) {buttonRef.current.focus()}
-  }, [gameWon])
-
+    let intervalID;
+    if (gameWon) {
+      buttonRef.current.focus();
+      if (timer > bestTime || bestTime !== 0) {
+        setBestTime(timer);
+        localStorage.setItem("bestTime", timer);
+      }
+      return;
+    }
+    intervalID = setInterval(() => {
+      // setTimer((prevTimer) => prevTimer + 1);
+    }, 1000);
+    return () => {
+      clearInterval(intervalID);
+    };
+  }, [gameWon]);
 
   const hold = (id) => {
-    setNewDice(prevDice => prevDice.map( dice => {
-      return dice.id === id ? {...dice, isHeld : !dice.isHeld}: dice;
-    }))
-  }
+    setNewDice((prevDice) =>
+      prevDice.map((dice) => {
+        return dice.id === id ? { ...dice, isHeld: !dice.isHeld } : dice;
+      }),
+    );
+  };
 
   function generateAllNewDice() {
     return new Array(10).fill(0).map(() => {
-    const rand = Math.ceil(Math.random() * 6);
-    return {
-      value : rand,
+      const rand = Math.ceil(Math.random() * 6);
+      return {
+        value: rand,
 
-      isHeld : false,
-      id : nanoid(),
-    }
+        isHeld: false,
+        id: nanoid(),
+      };
     });
   }
 
   const handleRoll = () => {
-    gameWon? 
-    setNewDice(generateAllNewDice()):   
-    setNewDice(prevDice => {
-      return prevDice.map( die => {
-        return die.isHeld? 
-        die:
-        { ...die,
-          value : Math.ceil(Math.random() * 6)
-         } 
-      } )
+    if (gameWon) {
+      setNewDice(generateAllNewDice());
+      setTimer(0);
+    }
+    setNewDice((prevDice) => {
+      return prevDice.map((die) => {
+        return die.isHeld
+          ? die
+          : { ...die, value: Math.ceil(Math.random() * 6) };
+      });
     });
   };
   const dieElement = newDice.map((dice) => {
     // console.log(num);
-    return <Die key={dice.id} id={dice.id} value={dice.value} isHeld={dice.isHeld} hold={hold} />;
+    return (
+      <Die
+        key={dice.id}
+        id={dice.id}
+        value={dice.value}
+        isHeld={dice.isHeld}
+        hold={hold}
+      />
+    );
   });
   return (
     <main className="bg-[#0B2434] min-h-screen flex flex-col items-center justify-center p-4">
@@ -61,6 +92,7 @@ function App() {
             Roll until all dice are the same. Click each die to freeze it at its
             current value between rolls.
           </p>
+          <Timer timer={timer} bestTime={bestTime} />
         </div>
         <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-5 place-items-center gap-4">
           {dieElement}
@@ -70,9 +102,9 @@ function App() {
           className="px-12 py-4 bg-[#4427ff] text-lg font-semibold text-white rounded-md m-4"
           onClick={handleRoll}
         >
-          {gameWon? "New Game!" : "Roll"}
+          {gameWon ? "New Game!" : "Roll"}
         </button>
-        {gameWon && <Confetti width={width} height={height}/>}
+        {gameWon && <Confetti width={width} height={height} />}
       </div>
     </main>
   );
