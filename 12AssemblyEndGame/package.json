@@ -12,7 +12,10 @@
   "dependencies": {
     "clsx": "^2.1.1",
     "react": "^19.2.5",
-    "react-dom": "^19.2.5"
+    "react-confetti": "^6.4.0",
+    "react-dom": "^19.2.5",
+    "react-use": "^17.6.0",
+    "tslib": "^2.8.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.4",

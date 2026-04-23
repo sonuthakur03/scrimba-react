@@ -1,11 +1,15 @@
 import { useState } from "react";
 import { languages } from "./languages";
 import { clsx } from "clsx";
+import { getFarewellText, getCurrentWord } from "./utils";
+import { useWindowSize } from "react-use";
+import Confetti from "react-confetti";
 
 function App() {
   // state variables
-  const [currentWord, setCurrentWord] = useState("react");
+  const [currentWord, setCurrentWord] = useState(() => getCurrentWord());
   const [guessedLetters, setGuessedLetters] = useState([]);
+  const { width, height } = useWindowSize();
 
   // derived variables
   const wrongGuessCount = guessedLetters.filter(
@@ -16,8 +20,18 @@ function App() {
     guessedLetters.includes(letter),
   );
   const isGameOver = isGameLost || isGameWon;
+  const lastGuessedLetter = guessedLetters[guessedLetters.length - 1];
+  const isLastGuessedLetterWrong =
+    lastGuessedLetter && !currentWord.includes(lastGuessedLetter);
 
-  // console.log(wrongGuessCount);
+  const lostLanguage = languages[wrongGuessCount - 1];
+
+  const farewellMsg =
+    isLastGuessedLetterWrong && lostLanguage
+      ? getFarewellText(lostLanguage.name)
+      : "";
+
+  // console.log(getFarewellText("html"));
 
   // static variables
   const alphabet = "abcdefghijklmnopqrstuvwxyz";
@@ -51,19 +65,28 @@ function App() {
   });
 
   const wordElement = [...currentWord].map((letter, index) => {
-    const isRevealed = guessedLetters.includes(letter);
+    const isGuessed = guessedLetters.includes(letter);
+    const isRevealed = isGuessed || isGameLost;
+
+    const isMissed = isGameLost && !isGuessed;
+
     return (
       <div
+        key={index}
         className={clsx(
           "flex-box rounded-sm h-[50px] w-[50px] border-b-2 transition-colors",
-          // Default state
+
+          // 1. Still hidden (Game active & not guessed)
           !isRevealed && "bg-[#323232] border-white",
-          // Revealed state
-          isRevealed && "bg-[#4a4a4a] border-green-400 text-green-400",
+
+          // 2. Correct (Guessed by user)
+          isGuessed && "bg-[#4a4a4a] border-green-400 text-green-400",
+
+          // 3. Missed (Game over & not guessed)
+          isMissed && "bg-[#4a4a4a] border-red-800 text-red-400",
         )}
-        key={index}
       >
-        {guessedLetters.includes(letter) ? letter.toUpperCase() : ""}
+        {isRevealed ? letter.toUpperCase() : ""}
       </div>
     );
   });
@@ -72,6 +95,7 @@ function App() {
     const isGuessed = guessedLetters.includes(letter);
     const isCorrect = isGuessed && currentWord.includes(letter);
     const isWrong = isGuessed && !currentWord.includes(letter);
+    const isButtonDisabled = isGameOver || isGuessed;
     const classname = clsx(
       "flex-box rounded-md h-[50px] w-[50px] border-2 border-white",
 
@@ -80,9 +104,9 @@ function App() {
 
         "bg-green-500": isCorrect,
 
-        "bg-red-500": isWrong,
+        "bg-red-500 ": isWrong,
 
-        "opacity-50": isGuessed && !isCorrect && isWrong,
+        "opacity-50 cursor-not-allowed": isButtonDisabled,
       },
     );
 
@@ -92,11 +116,19 @@ function App() {
         value={letter}
         onClick={() => addguessedLetters(letter)}
         className={classname}
+        disabled={isButtonDisabled}
       >
         {letter.toUpperCase()}
       </button>
     );
   });
+
+  const setNewGame = () => {
+    setCurrentWord(getCurrentWord());
+    setGuessedLetters([]);
+  };
+
+  console.log(currentWord);
 
   return (
     <main className="flex-box flex-col mt-8 gap-8 w-[60%] mx-auto">
@@ -111,6 +143,8 @@ function App() {
         className={clsx(
           "h-24  w-full p-6 my-2 flex-box rounded-md transition-all",
           isGameWon && "bg-[#10A95B]",
+          farewellMsg && !isGameLost && "bg-[#7A5EA7]",
+          isGameLost && "bg-[#BA2A2A]",
         )}
       >
         <p className="text-2xl font-bold italic">
@@ -118,7 +152,7 @@ function App() {
             ? isGameLost
               ? `You lose! Better start learning Assembly 😭🫡`
               : `You win! Well Done!!🎉`
-            : null}
+            : farewellMsg}
         </p>
       </section>
       <section className="flex-box flex-wrap w-[75%] gap-2">
@@ -131,10 +165,14 @@ function App() {
         {keyboardElement}
       </section>
       {isGameOver && (
-        <button className="border border-[#D7D7D7] py-4 px-20 rounded-md bg-[#11B5E5] text-black text-xl font-bold">
+        <button
+          className="border border-[#D7D7D7] py-4 px-20 rounded-md bg-[#11B5E5] text-black text-xl font-bold"
+          onClick={setNewGame}
+        >
           New Game
         </button>
       )}
+      {isGameWon && <Confetti width={width} height={height} />}
     </main>
   );
 }
