@@ -172,7 +172,9 @@ function App() {
           New Game
         </button>
       )}
-      {isGameWon && <Confetti width={width} height={height} />}
+      {isGameWon && (
+        <Confetti width={width} height={height} numberOfPieces={1000} />
+      )}
     </main>
   );
 }
