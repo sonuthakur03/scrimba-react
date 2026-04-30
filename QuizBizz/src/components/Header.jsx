@@ -1,14 +1,13 @@
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 
 import Logo from "./Logo";
 
 export default function Header() {
-  const [active, setActive] = useState("Home");
-
   const navItems = ["Home", "Quizzes", "Score", "About"];
 
   return (
-    <header className="bg-surface border-b border-border px-16 py-4 flex justify-between items-center">
+    <header className="bg-surface border-b border-border px-16 py-4 flex-center justify-between sticky top-0 z-10">
       <h1 className="font-heading text-2xl text-primary flex items-center">
         <span className="text-text">Quiz</span>
         <Logo size={40} />
@@ -17,13 +16,15 @@ export default function Header() {
 
       <ul className="flex gap-6">
         {navItems.map((item) => (
-          <li
+          <NavLink
+            to={item === "Home" ? "/" : `/${item.toLowerCase()}`}
             key={item}
-            onClick={() => setActive(item)}
-            className={`nav-item ${active === item ? "nav-item-active" : ""}`}
+            className={({ isActive }) =>
+              `nav-item ${isActive ? "text-primary font-bold " : ""}`
+            }
           >
             {item}
-          </li>
+          </NavLink>
         ))}
       </ul>
 
