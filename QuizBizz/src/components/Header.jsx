@@ -28,14 +28,14 @@ export default function Header() {
         ))}
       </ul>
 
-      <div className="flex-center gap-4">
+      {/* <div className="flex-center gap-4">
         <button className=" text-text font-semibold py-2 px-8 border border-border rounded-md">
           Sign In
         </button>
         <button className="bg-primary text-text font-semibold py-2 px-8 border border-border rounded-md">
           Sign Up
         </button>
-      </div>
+      </div> */}
     </header>
   );
 }

@@ -1,9 +1,10 @@
 import React from "react";
 import { LuBrain } from "react-icons/lu";
+import { Link } from "react-router-dom";
 
 const Logo = ({ size }) => {
   return (
-    <span className="inline-flex items-center">
+    <Link to={"/"} className="inline-flex items-center">
       <svg width="0" height="0">
         <linearGradient id="half-and-half" x1="0%" y1="0%" x2="0%" y2="100%">
           {/* Top 50% White */}
@@ -17,10 +18,10 @@ const Logo = ({ size }) => {
         size={size}
         style={{
           display: "inline",
-          filter: "drop-shadow(0px 0px 1px rgba(0,0,0,0.5)",
+          filter: "drop-shadow(0px 0px 1px rgba(0,0,0,0.5))",
         }}
       />
-    </span>
+    </Link>
   );
 };
 
