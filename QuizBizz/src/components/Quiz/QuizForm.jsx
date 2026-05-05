@@ -108,7 +108,6 @@ const QuizForm = ({ setIsQuestionsFetched, handleFetchQuiz }) => {
           className="mt-6 w-full font-body font-semibold text-white py-3.5 px-5 rounded-xl transition-all
                        bg-primary bg-gradient-to-t from-primary to-[#818cf8]
                        hover:from-[#5154ed] hover:to-[#6366F1]
-                       shadow-[0_4px_10px_rgba(99,102,241,0.4)]
                        active:scale-[0.98]"
         >
           Start Quiz

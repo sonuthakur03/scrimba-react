@@ -1,11 +1,15 @@
 import React from "react";
 import { LuChevronLeft, LuChevronRight } from "react-icons/lu";
 
-const QuizTF = () => {
-  const options = [
-    { id: 1, text: "True" },
-    { id: 2, text: "False" },
-  ];
+const QuizTF = ({
+  data,
+  handleNext,
+  handlePrevious,
+  setCurrentQuestionIndex,
+  currentQuestionIndex,
+  decodeHTML,
+}) => {
+  console.log(data);
 
   return (
     <>
@@ -13,30 +17,49 @@ const QuizTF = () => {
         True / False Quiz
       </h2>
 
-      <div className="block mb-3 text-md font-bold text-text font-body">
-        Question 1 : The capital of France is Paris.
-      </div>
+      {data?.map((question, index) => {
+        return index === currentQuestionIndex ? (
+          <div key={index + 1} className="flex-center flex-col w-[90%]">
+            <div className="block mb-3 text-lg font-bold text-text font-body self-start">
+              <p>Category: {decodeHTML(question.category)}</p>
+              <p>Difficulty: {decodeHTML(question.difficulty)}</p>
+            </div>
+            <div className="block mb-3 text-md font-medium text-muted font-body self-start">
+              Question {index + 1} of {data.length}
+            </div>
+            <div className="block mb-3 text-md font-bold text-text font-body self-start">
+              Question {index + 1} : {decodeHTML(question.question)}
+            </div>
 
-      <div className="grid grid-cols-2 gap-6 mt-6">
-        {options.map((option) => (
-          <div
-            key={option.id}
-            className="bg-surface border border-border py-4 px-16 rounded-xl 
+            <div className="grid grid-cols-2 gap-6 mt-6 place-items-stretch w-full">
+              {question.options.map((option, index) => (
+                <div
+                  key={index + 1}
+                  className="bg-surface border border-border py-4 px-16 rounded-xl 
                        hover:bg-primary hover:text-text hover:-translate-y-1
                        cursor-pointer transition-all flex-center text-lg font-semibold"
-          >
-            {option.text}
+                >
+                  {decodeHTML(option)}
+                </div>
+              ))}
+            </div>
           </div>
-        ))}
-      </div>
+        ) : null;
+      })}
 
       <div className="flex-center gap-4 mt-8">
-        <button className="bg-primary text-text p-4 w-[200px] rounded-xl hover:bg-primary/80 transition-all flex-center gap-2">
+        <button
+          className={`bg-primary text-text p-4 w-[200px] rounded-xl hover:bg-primary/80 transition-all flex-center gap-2 ${currentQuestionIndex === 0 ? "cursor-not-allowed opacity-50" : ""} `}
+          onClick={handlePrevious}
+        >
           <LuChevronLeft size={24} />
           Previous
         </button>
 
-        <button className="bg-primary text-text p-4 w-[200px] rounded-xl hover:bg-primary/80 transition-all flex-center gap-2">
+        <button
+          className={`bg-primary text-text p-4 w-[200px] rounded-xl hover:bg-primary/80 transition-all flex-center gap-2 ${currentQuestionIndex === data.length - 1 ? "cursor-not-allowed opacity-50" : ""}`}
+          onClick={handleNext}
+        >
           Next
           <LuChevronRight size={24} />
         </button>
