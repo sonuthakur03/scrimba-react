@@ -5,13 +5,31 @@ import QuizTF from "./Quiz/QuizTF";
 
 const Quiz = () => {
   const [isQuestionsFetched, setIsQuestionsFetched] = React.useState(false);
-  const [data, setData] = React.useState(null);
   const [isLoading, setIsLoading] = React.useState(false);
   const [currentQuestionIndex, setCurrentQuestionIndex] = React.useState(0);
+  const [answers, setAnswers] = React.useState({});
+  const [formattedData, setFormattedData] = React.useState(null);
 
   React.useEffect(() => {
     console.log("Fetched:", isQuestionsFetched);
+    console.log("Current Question Index: ", currentQuestionIndex);
+    console.log("Answers: ", answers);
   }, [isQuestionsFetched]);
+
+  // Utility function to decode HTML entities in questions and options
+  const decodeHTML = (text) => {
+    const txt = document.createElement("textarea");
+    txt.innerHTML = text;
+    return txt.value;
+  };
+
+  // Handler for selecting an option in True/False quiz
+  const handleSelectedOption = (e) => {
+    console.log("Selected option: ", e.target.textContent.trim());
+    const selectedOption = e.target.textContent.trim();
+    setAnswers((prev) => ({ ...prev, [currentQuestionIndex]: selectedOption }));
+    console.log("Updated answers: ", answers);
+  };
 
   // Function to fetch quiz questions based on selected settings
   const handleFetchQuiz = async (quizSettings) => {
@@ -30,8 +48,24 @@ const Quiz = () => {
       const data = await res.json();
       console.log("Fetched quiz questions: ", data.results);
       if (data.response_code === 0) {
-        setData(data.results);
         setIsQuestionsFetched(true);
+        // Format the data to include shuffled options for each question
+        const formatted = data.results.map((question) => {
+          const options = shuffleArray([
+            question.correct_answer,
+            ...question.incorrect_answers,
+          ]);
+          return {
+            ...question,
+            question: decodeHTML(question.question),
+            category: decodeHTML(question.category),
+            difficulty: decodeHTML(question.difficulty),
+            correct_answer: decodeHTML(question.correct_answer),
+            incorrect_answers: question.incorrect_answers.map(decodeHTML),
+            options,
+          };
+        });
+        setFormattedData(formatted);
       } else {
         console.log("No questions found for this config");
       }
@@ -44,7 +78,7 @@ const Quiz = () => {
 
   // Handlers for navigating between questions
   const handleNext = () => {
-    if (currentQuestionIndex < data.length - 1) {
+    if (currentQuestionIndex < formattedData.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     }
   };
@@ -69,32 +103,19 @@ const Quiz = () => {
     return shuffled;
   };
 
-  // Format the data to include shuffled options for each question
-  const formattedData = data?.map((q) => {
-    return {
-      ...q,
-      options: shuffleArray([q.correct_answer, ...q.incorrect_answers]),
-    };
-  });
-  // Utility function to decode HTML entities in questions and options
-  const decodeHTML = (text) => {
-    const txt = document.createElement("textarea");
-    txt.innerHTML = text;
-    return txt.value;
-  };
-
   return (
     <section className="flex items-center justify-center flex-col h-[75vh] w-[70%] bg-background">
       <div className="bg-surface border border-border p-10 rounded-2xl drop-shadow-[0_0_15px_rgba(99,102,241,0.2)] flex-center flex-col w-full">
         {isQuestionsFetched ? (
-          data?.[0]?.type === "multiple" ? (
+          formattedData?.[0]?.type === "multiple" ? (
             <QuizMCQ
               data={formattedData}
               handleNext={handleNext}
               handlePrevious={handlePrevious}
               setCurrentQuestionIndex={setCurrentQuestionIndex}
               currentQuestionIndex={currentQuestionIndex}
-              decodeHTML={decodeHTML}
+              handleSelectedOption={handleSelectedOption}
+              answers={answers}
             />
           ) : (
             <QuizTF
@@ -103,7 +124,8 @@ const Quiz = () => {
               handlePrevious={handlePrevious}
               setCurrentQuestionIndex={setCurrentQuestionIndex}
               currentQuestionIndex={currentQuestionIndex}
-              decodeHTML={decodeHTML}
+              handleSelectedOption={handleSelectedOption}
+              answers={answers}
             />
           )
         ) : (
