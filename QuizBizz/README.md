@@ -1,16 +1,190 @@
-# React + Vite
+# Quizify - React Quiz Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 📌 Overview
 
-Currently, two official plugins are available:
+Quizify is a modern and interactive quiz application built with React and Tailwind CSS.
+The app allows users to:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Select quiz categories
+- Choose difficulty levels
+- Attempt Multiple Choice and True/False quizzes
+- Navigate between questions
+- Track scores
+- Store previous quiz attempts using localStorage
+- View previous quiz history
 
-## React Compiler
+The application uses the Open Trivia Database API for fetching quiz questions dynamically.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+# 🚀 Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- 🎯 Dynamic quiz generation using OpenTDB API
+- 🧠 Multiple Choice & True/False support
+- 🔀 Randomized options
+- 📊 Score calculation system
+- 💾 LocalStorage quiz history
+- 🎨 Modern responsive UI
+- ⚡ Smooth transitions and hover effects
+- 📱 Mobile-friendly layout
+
+---
+
+# 🛠️ Tech Stack
+
+## Frontend
+
+- React.js
+- Tailwind CSS
+- React Icons
+- React Router DOM
+
+## API
+
+- Open Trivia DB API
+
+---
+
+# 📂 Project Structure
+
+```bash
+src/
+│
+├── components/
+│   ├── Quiz/
+│   │   ├── QuizForm.jsx
+│   │   ├── QuizMCQ.jsx
+│   │   ├── QuizTF.jsx
+│   │   └── ScorePage.jsx
+│
+├── hooks/
+│   └── useQuiz.js
+│
+├── utils/
+│   └── quizUtils.js
+│
+├── pages/
+│   └── Quiz.jsx
+│
+├── App.jsx
+└── main.jsx
+```
+
+---
+
+# ⚙️ Installation
+
+## 1️⃣ Clone the repository
+
+```bash
+git clone <your-repo-url>
+```
+
+## 2️⃣ Navigate into project
+
+```bash
+cd quiz-app
+```
+
+## 3️⃣ Install dependencies
+
+```bash
+npm install
+```
+
+## 4️⃣ Start development server
+
+```bash
+npm run dev
+```
+
+---
+
+# 🌐 API Used
+
+## Open Trivia Database
+
+API Endpoint:
+
+```bash
+https://opentdb.com/api.php
+```
+
+Example:
+
+```bash
+https://opentdb.com/api.php?amount=10&category=23&difficulty=medium&type=multiple
+```
+
+---
+
+# 🧠 Application Flow
+
+```text
+Quiz Form
+   ↓
+Fetch Questions
+   ↓
+Display Questions
+   ↓
+Store Answers
+   ↓
+Calculate Score
+   ↓
+Save Result to LocalStorage
+   ↓
+Display Score Dashboard
+```
+
+---
+
+# 💾 LocalStorage Structure
+
+```js
+[
+  {
+    id: 123456,
+    score: 8,
+    total: 10,
+    category: "History",
+    difficulty: "medium",
+    type: "multiple",
+    date: "2026-05-08",
+  },
+];
+```
+
+---
+
+# 🎨 UI Design Highlights
+
+- Dark modern theme
+- Indigo primary color palette
+- Glassmorphism-inspired cards
+- Interactive hover animations
+- Responsive dashboard layout
+
+---
+
+# 📸 Future Improvements
+
+- Timer system
+- Leaderboard
+- Authentication
+- Multiplayer quizzes
+- Category analytics
+- Confetti animations
+- Sound effects
+- Backend database integration
+
+---
+
+# 👨‍💻 Author
+
+Built with React, Tailwind CSS, and Open Trivia DB API.
+
+---
+
+# 📄 License
+
+This project is open-source and available for learning purposes.
