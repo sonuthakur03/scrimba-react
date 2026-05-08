@@ -3,7 +3,8 @@ import Home from "./Home";
 import { Routes, Route } from "react-router-dom";
 import Quiz from "./Quiz";
 import Score from "./Score";
-import About from "./About";
+import Topics from "./Topics";
+import Contact from "./Contact";
 
 const Main = () => {
   return (
@@ -12,7 +13,12 @@ const Main = () => {
         <Route path="/" element={<Home />} />
         <Route path="/quizzes" element={<Quiz />} />
         <Route path="/score" element={<Score />} />
-        <Route path="/about" element={<About />} />
+        <Route path="/topics" element={<Topics />} />
+        <Route
+          path="*"
+          element={<h2 className="text-3xl">Page Not Found</h2>}
+        />
+        <Route path="/contact" element={<Contact />} />
       </Routes>
     </main>
   );

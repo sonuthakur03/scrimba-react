@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import Logo from "./Logo";
 
 export default function Header() {
-  const navItems = ["Home", "Quizzes", "Score", "About"];
+  const navItems = ["Home", "Quizzes", "Score", "Topics"];
 
   return (
     <header className="bg-surface border-b border-border px-16 py-4 flex-center justify-between sticky top-0 z-10">

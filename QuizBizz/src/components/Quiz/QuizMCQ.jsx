@@ -1,6 +1,6 @@
 import React from "react";
 import { LuChevronLeft, LuChevronRight } from "react-icons/lu";
-import { Link } from "react-router-dom";
+
 const QuizMCQ = ({
   data,
   setCurrentQuestionIndex,
@@ -56,13 +56,8 @@ const QuizMCQ = ({
         <button
           className={`bg-primary  text-text p-4 w-[200px] rounded-xl hover:bg-primary/80 transition-all flex-center gap-2 cursor-pointer `}
           onClick={handleNext}
-          disabled={currentQuestionIndex === data.length - 1}
         >
-          {currentQuestionIndex === data.length - 1 ? (
-            <Link to="/score">Finish</Link>
-          ) : (
-            "Next"
-          )}
+          {currentQuestionIndex === data.length - 1 ? "Submit" : "Next"}
           <LuChevronRight size={24} className="text-3xl" />
         </button>
       </div>

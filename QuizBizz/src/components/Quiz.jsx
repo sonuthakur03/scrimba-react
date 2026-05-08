@@ -2,6 +2,7 @@ import React from "react";
 import QuizForm from "./Quiz/QuizForm";
 import QuizMCQ from "./Quiz/QuizMCQ";
 import QuizTF from "./Quiz/QuizTF";
+import { useNavigate } from "react-router-dom";
 
 const Quiz = () => {
   const [isQuestionsFetched, setIsQuestionsFetched] = React.useState(false);
@@ -9,6 +10,9 @@ const Quiz = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = React.useState(0);
   const [answers, setAnswers] = React.useState({});
   const [formattedData, setFormattedData] = React.useState(null);
+
+  let score = 0;
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     console.log("Fetched:", isQuestionsFetched);
@@ -21,6 +25,38 @@ const Quiz = () => {
     const txt = document.createElement("textarea");
     txt.innerHTML = text;
     return txt.value;
+  };
+
+  // Function to calculate the final score based on selected answers and correct answers
+  const calculateScore = () => {
+    console.log("Calculating score...");
+    formattedData.map((question, i) => {
+      if (answers[i] === question.correct_answer) {
+        score++;
+      }
+    });
+
+    const quizResults =
+      (localStorage.getItem("quizResults") &&
+        JSON.parse(localStorage.getItem("quizResults"))) ||
+      [];
+    const newResult = {
+      id: Date.now(),
+      score: score,
+      total: formattedData.length,
+      category: formattedData[0].category,
+      difficulty: formattedData[0].difficulty,
+      type: formattedData[0].type,
+      date: new Date().toLocaleDateString(),
+    };
+    if (quizResults.length >= 5) {
+      quizResults.shift();
+    }
+    quizResults.push(newResult);
+
+    localStorage.setItem("quizResults", JSON.stringify(quizResults));
+
+    console.log("Final Score: ", score);
   };
 
   // Handler for selecting an option in True/False quiz
@@ -80,6 +116,9 @@ const Quiz = () => {
   const handleNext = () => {
     if (currentQuestionIndex < formattedData.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
+    } else {
+      calculateScore();
+      navigate("/score");
     }
   };
 
@@ -116,6 +155,7 @@ const Quiz = () => {
               currentQuestionIndex={currentQuestionIndex}
               handleSelectedOption={handleSelectedOption}
               answers={answers}
+              calculateScore={calculateScore}
             />
           ) : (
             <QuizTF
@@ -126,6 +166,7 @@ const Quiz = () => {
               currentQuestionIndex={currentQuestionIndex}
               handleSelectedOption={handleSelectedOption}
               answers={answers}
+              calculateScore={calculateScore}
             />
           )
         ) : (

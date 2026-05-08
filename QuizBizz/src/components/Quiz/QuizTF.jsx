@@ -1,6 +1,5 @@
 import React from "react";
 import { LuChevronLeft, LuChevronRight } from "react-icons/lu";
-import { Link } from "react-router-dom";
 
 const QuizTF = ({
   data,
@@ -52,6 +51,7 @@ const QuizTF = ({
         <button
           className={`bg-primary text-text p-4 w-[200px] rounded-xl hover:bg-primary/80 transition-all flex-center gap-2 cursor-pointer ${currentQuestionIndex === 0 ? "cursor-not-allowed opacity-50" : ""} `}
           onClick={handlePrevious}
+          disabled={currentQuestionIndex === 0}
         >
           <LuChevronLeft size={24} />
           Previous
@@ -61,11 +61,7 @@ const QuizTF = ({
           className={`bg-primary text-text p-4 w-[200px] rounded-xl hover:bg-primary/80 transition-all flex-center gap-2 cursor-pointer `}
           onClick={handleNext}
         >
-          {currentQuestionIndex === data.length - 1 ? (
-            <Link to="/score">Finish</Link>
-          ) : (
-            "Next"
-          )}
+          {currentQuestionIndex === data.length - 1 ? "Submit" : "Next"}
           <LuChevronRight size={24} />
         </button>
       </div>
