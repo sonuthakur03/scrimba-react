@@ -3,7 +3,7 @@ import { LuMail, LuPhone, LuMapPin } from "react-icons/lu";
 
 const Contact = () => {
   return (
-    <section className="max-h-screen h-[75vh] bg-background flex items-center justify-center p-6">
+    <section className="max-h-screen h-[72vh] bg-background flex items-center justify-center p-6">
       <div className="bg-surface border border-border rounded-2xl w-full max-w-7xl p-10">
         {/* HEADER */}
         <h1 className="text-3xl font-bold text-text mb-3">Contact Us</h1>

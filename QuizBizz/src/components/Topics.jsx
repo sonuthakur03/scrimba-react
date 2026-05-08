@@ -12,8 +12,8 @@ const Topics = () => {
   ];
 
   return (
-    <section className="min-h-screen bg-background flex items-center justify-center p-6">
-      <div className="bg-surface border border-border rounded-2xl w-full max-w-7xl p-10">
+    <section className="max-h-screen bg-background flex items-center justify-center p-6 ">
+      <div className="bg-surface border border-border rounded-2xl w-full max-w-7xl p-4">
         {/* 🧠 ABOUT SECTION */}
         <div className="mb-10">
           <h1 className="text-3xl font-bold text-text mb-3">About Quiz App</h1>

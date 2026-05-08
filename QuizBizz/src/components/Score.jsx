@@ -9,9 +9,9 @@ const Score = () => {
   const latestScore = latestAttempt ? latestAttempt.score : 0;
 
   return (
-    <section className="max-h-screen bg-background flex items-center justify-center my-4">
+    <section className="max-h-screen bg-background flex items-center justify-center ">
       {/* 🌟 BIGGER CONTAINER */}
-      <div className="bg-surface border border-border rounded-2xl w-full max-w-7xl p-10 shadow-[0_0_25px_rgba(99,102,241,0.25)]">
+      <div className="bg-surface border border-border rounded-2xl w-full max-w-7xl p-4 shadow-[0_0_25px_rgba(99,102,241,0.25)]">
         <h1 className="text-3xl font-bold text-text mb-8">
           Quiz Results Dashboard
         </h1>

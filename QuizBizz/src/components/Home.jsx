@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
-    <section className="flex-center justify-between h-[70vh]">
+    <section className="flex-center justify-between max-h-screen">
       <div className="max-w-[45%] self-start mt-10 flex justify-center flex-col gap-10">
         <span className="text-xs text-text bg-slate-500/20 py-2 px-6 rounded-full font-semibold flex-center gap-2 mb-4 w-max">
           <FaBolt className="text-lg text-yellow-400 " />

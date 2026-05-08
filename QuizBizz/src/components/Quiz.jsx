@@ -143,7 +143,7 @@ const Quiz = () => {
   };
 
   return (
-    <section className="flex items-center justify-center flex-col h-[75vh] w-[70%] bg-background">
+    <section className="flex items-center justify-center flex-col max-h-screen w-[70%] bg-background">
       <div className="bg-surface border border-border p-10 rounded-2xl drop-shadow-[0_0_15px_rgba(99,102,241,0.2)] flex-center flex-col w-full">
         {isQuestionsFetched ? (
           formattedData?.[0]?.type === "multiple" ? (
